@@ -1,6 +1,18 @@
 # 云听电台工具集 (radio-cn-tools)
 
-解决 radio.cn (云听) 直播流地址签名过期(403)问题的工具集。
+> 解决 radio.cn (云听) 直播流地址签名过期(403)问题的工具集
+
+## 🚀 一键安装油猴脚本（电台收藏）
+
+点击下方链接，Tampermonkey 会直接弹出安装确认框：
+
+[**安装 云听电台收藏助手**](https://www.tampermonkey.net/script_installation.php#url=https://raw.githubusercontent.com/s1sunny/radio-cn-tools/main/radio_fav.user.js)
+
+```
+https://www.tampermonkey.net/script_installation.php#url=https://raw.githubusercontent.com/s1sunny/radio-cn-tools/main/radio_fav.user.js
+```
+
+安装后打开 [云听电台页](https://www.radio.cn/pc-portal/erji/radioStation.html)，在"类型："行右侧即可看到 **★ 收藏** 入口。
 
 ## 背景
 
