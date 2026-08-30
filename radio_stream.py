@@ -21,6 +21,7 @@ radio_stream.py - 云听(radio.cn)电台流地址获取/代理工具
      --https  把返回地址转成 https
      --m3u8   输出 m3u8 地址而非 mp3
      --url-only 只输出第一个匹配台的 URL(纯URL,无台名) 用于 bat 脚本解析
+     --station N 用预设编号选台(1=汕头音乐 2=汕头综合), 避免 bat 传中文编码问题
      --serve PORT  启动永续代理服务
 
 示例:
@@ -37,11 +38,20 @@ import hashlib
 import urllib.request
 import urllib.parse
 
-SCRIPT_VERSION = "1.1.0"
+SCRIPT_VERSION = "1.2.0"
 
 # 签名密钥 (来自 radio.cn 官方前端 api.js, 硬编码公开)
 SIGN_KEY = "f0fc4c668392f9f9a447e48584c214ee"
 API_HOST = "https://ytmsout.radio.cn"
+
+# 预设台位 (供 --station 使用)
+STATIONS = {
+    1: "汕头音乐",
+    2: "汕头综合",
+    3: "潮州交通音乐",
+    4: "潮州综合",
+    5: "清远交通音乐",
+}
 
 # 常用省份码
 PROVINCES = {
@@ -164,22 +174,34 @@ def main():
     args = [a for a in sys.argv[1:]]
     kwargs = {"province_code": 440000}
     keyword = None
-    for a in args:
+    i = 0
+    while i < len(args):
+        a = args[i]
         if a == "--list":
             kwargs.setdefault("list_only", True)
         elif a == "--https":
             kwargs["want_https"] = True
+        elif a == "--station":
+            n = int(args[i + 1]) if i + 1 < len(args) else None
+            i += 1  # 消费台号参数
+            if n is None:
+                print("需要 --station 编号")
+                return
+            if n not in STATIONS:
+                print(f"无效台号 {n}, 可选: " + ", ".join(f"{k}={v}" for k, v in STATIONS.items()))
+                return
+            keyword = STATIONS[n]
+            kwargs["url_only"] = True
         elif a == "--m3u8":
             kwargs["want_m3u8"] = True
         elif a == "--url-only":
             kwargs["url_only"] = True
         elif a == "--serve":
-            idx = args.index("--serve")
-            serve(int(args[idx + 1]) if len(args) > idx + 1 else 8123)
+            serve(int(args[i + 1]) if i + 1 < len(args) else 8123)
             return
         elif a.startswith("-p"):
-            idx = args.index(a)
-            kwargs["province_code"] = int(args[idx + 1])
+            kwargs["province_code"] = int(args[i + 1])
+            i += 1
         elif a in PROVINCES:
             kwargs["province_code"] = PROVINCES[a]
         elif a.startswith("-"):
@@ -187,6 +209,7 @@ def main():
             return
         else:
             keyword = a
+        i += 1
 
     results = query(keyword,
                     kwargs.get("province_code", 440000),

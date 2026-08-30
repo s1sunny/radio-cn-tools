@@ -38,7 +38,9 @@ python3 radio_stream.py 汕头 --https        # https 地址
 
 ### Windows
 
-双击 `radio.bat`，输入 1（汕头音乐）或 2（汕头综合），自动获取地址并用浏览器播放。依赖 WSL + python3。
+双击 `radio.bat`，输入 1（汕头音乐）或 2（汕头综合），自动获取地址并用浏览器播放。
+要求本机已安装 Python（`python` 命令可用），`radio.bat` 与 `radio_stream.py` 放在同一目录。
+不依赖 WSL。
 
 ### 收藏油猴脚本
 
@@ -69,6 +71,6 @@ https://www.tampermonkey.net/script_installation.php#url=https://raw.githubuserc
 
 ## 版本
 
-- radio_stream.py v1.1.0 (2026-08-30)
+- radio_stream.py v1.2.0 (2026-08-30)
 - radio.bat v1.0.0 (2026-08-30)
 - radio_fav.user.js v1.0.0 (2026-08-30)

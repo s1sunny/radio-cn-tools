@@ -5,12 +5,12 @@ setlocal enabledelayedexpansion
 
 REM ============================================
 REM  radio.bat - 云听(radio.cn)电台选台播放引导
-REM  依赖: WSL + python3 (radio_stream.py)
+REM  依赖: 本机安装 Python (同目录 radio_stream.py)
 REM  用法: 双击运行, 输入 1 或 2 选台
-REM  v1.0.0 2026-08-30
+REM  v1.1.0 2026-08-30
 REM ============================================
 
-set "PY=/home/sunny/.openclaw/workspace/scripts/radio_stream.py"
+set "PY=%~dp0radio_stream.py"
 
 :MENU
 cls
@@ -24,18 +24,19 @@ echo    0. 退出
 echo.
 set /p CHOICE=请选择 [1/2/0]: 
 
-if "%CHOICE%"=="1" set KW=汕头音乐& goto PLAY
-if "%CHOICE%"=="2" set KW=汕头综合& goto PLAY
+if "%CHOICE%"=="1" set SN=1& goto PLAY
+if "%CHOICE%"=="2" set SN=2& goto PLAY
 if "%CHOICE%"=="0" exit /b
 goto MENU
 
 :PLAY
 echo.
-echo 正在获取 %KW% 最新播放地址...
-for /f "usebackq delims=" %%i in (`wsl -e python3 %PY% %KW% --url-only`) do set URL=%%i
+echo 正在获取最新播放地址...
+for /f "usebackq delims=" %%i in (`python "%PY%" --station %SN% --url-only`) do set URL=%%i
 
 if not defined URL (
-    echo [错误] 未获取到地址, 请检查 WSL/python 是否可用
+    echo [错误] 未获取到地址。
+    echo 请确认已安装 Python 且 radio_stream.py 与 radio.bat 在同一目录。
     pause
     exit /b
 )
