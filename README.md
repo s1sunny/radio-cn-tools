@@ -30,7 +30,13 @@ python3 radio_stream.py 汕头 --https        # https 地址
 
 ### 收藏油猴脚本
 
-浏览器安装 Tampermonkey → 新建脚本 → 粘贴 `radio_fav.user.js` 内容 → 保存。打开云听电台页：
+**一键安装**（点击即弹油猴安装确认）：
+
+```
+https://www.tampermonkey.net/script_installation.php#url=https://raw.githubusercontent.com/s1sunny/radio-cn-tools/main/radio_fav.user.js
+```
+
+或者手动：浏览器安装 Tampermonkey → 新建脚本 → 粘贴 `radio_fav.user.js` 内容 → 保存。打开云听电台页：
 - "类型："行右侧出现 ★ 收藏 入口
 - 电台卡片右上角 ☆/★ 一键收藏/取消
 - 点击 ★ 收藏 弹出面板，点台名播放（自动重新拉新签名，不过期）、点 ✕ 取消
