@@ -1,6 +1,6 @@
-# 云听电台工具集 (radio-cn-tools)
+# 云听电台收藏助手 (radio-cn-tools)
 
-> 解决 radio.cn (云听) 直播流地址签名过期(403)问题的工具集
+> 解决 radio.cn (云听) 直播流地址签名过期(403)问题的油猴脚本
 
 ## 🚀 一键安装油猴脚本（电台收藏）
 
@@ -22,35 +22,12 @@ radio.cn 直播流地址如 `https://ytcastmp3.radio.cn/90/stream_11076.mp3?type
 
 | 文件 | 说明 |
 |------|------|
-| `radio_stream.py` | 核心工具：调官方列表 API（复刻前端签名算法）获取新鲜播放地址。支持按关键词查台、`--url-only` 输出纯 URL |
-| `radio.bat` | Windows 引导脚本：输入 1/2 选台（汕头音乐/汕头综合），调 WSL python 拿最新地址 → 默认浏览器播放 |
 | `radio_fav.user.js` | 油猴(Tampermonkey)脚本：云听电台页"类型："行加收藏入口，电台卡片星标收藏/取消，收藏播放自动刷新签名 |
 
 ## 使用方法
 
-### 命令行 (Linux/WSL)
+浏览器安装 Tampermonkey → 新建脚本 → 粘贴 `radio_fav.user.js` 内容 → 保存。打开云听电台页：
 
-```bash
-python3 radio_stream.py 汕头                # 查汕头所有台最新地址
-python3 radio_stream.py 汕头音乐 --url-only # 只输出纯 URL
-python3 radio_stream.py 汕头 --https        # https 地址
-```
-
-### Windows
-
-双击 `radio.bat`，输入 1（汕头音乐）或 2（汕头综合），自动获取地址并用浏览器播放。
-要求本机已安装 Python（`python` 命令可用），`radio.bat` 与 `radio_stream.py` 放在同一目录。
-不依赖 WSL。
-
-### 收藏油猴脚本
-
-**一键安装**（点击即弹油猴安装确认）：
-
-```
-https://www.tampermonkey.net/script_installation.php#url=https://raw.githubusercontent.com/s1sunny/radio-cn-tools/main/radio_fav.user.js
-```
-
-或者手动：浏览器安装 Tampermonkey → 新建脚本 → 粘贴 `radio_fav.user.js` 内容 → 保存。打开云听电台页：
 - "类型："行右侧出现 ★ 收藏 入口
 - 电台卡片右上角 ☆/★ 一键收藏/取消
 - 点击 ★ 收藏 弹出面板，点台名播放（自动重新拉新签名，不过期）、点 ✕ 取消
@@ -71,6 +48,4 @@ https://www.tampermonkey.net/script_installation.php#url=https://raw.githubuserc
 
 ## 版本
 
-- radio_stream.py v1.2.0 (2026-08-30)
-- radio.bat v1.0.0 (2026-08-30)
 - radio_fav.user.js v1.0.0 (2026-08-30)
