@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         云听电台收藏助手
 // @namespace    radio.cn-fav
-// @version      1.0.0
-// @description  云听电台页"类型："行增加收藏功能：电台可一键收藏/取消，收藏列表点击播放（自动刷新签名地址，永不403）
+// @version      1.1.0
+// @description  云听电台页"类型"列表末尾（"民族"之后）增加收藏入口：电台可一键收藏/取消，收藏列表点击播放（自动刷新签名地址，永不403）
 // @match        https://www.radio.cn/pc-portal/erji/radioStation.html*
 // @grant        none
 // @run-at       document-idle
@@ -81,7 +81,8 @@
     style.textContent = css;
     document.head.appendChild(style);
 
-    // ---------- 收藏按钮(类型: 行) ----------
+    // ---------- 收藏按钮(类型列表末尾, "民族"之后) ----------
+    // v1.1.0: 插入点从"类型："标题行改为 #livetype 列表末尾(最后一个类型标签之后)
     function addFavBtn() {
         var typeRow = Array.prototype.find.call(
             document.querySelectorAll('.area_name'),
@@ -96,7 +97,15 @@
             e.preventDefault();
             togglePanel();
         });
-        typeRow.appendChild(btn);
+        var typeUl = document.getElementById('livetype');
+        if (typeUl) {
+            var li = document.createElement('li');
+            li.className = 'box';
+            li.appendChild(btn);
+            typeUl.appendChild(li);
+        } else {
+            typeRow.appendChild(btn); // 兜底: 找不到列表时退回原标题行
+        }
         updateFavBtnCount();
     }
 

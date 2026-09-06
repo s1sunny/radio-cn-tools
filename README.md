@@ -12,7 +12,7 @@
 https://www.tampermonkey.net/script_installation.php#url=https://raw.githubusercontent.com/s1sunny/radio-cn-tools/main/radio_fav.user.js
 ```
 
-安装后打开 [云听电台页](https://www.radio.cn/pc-portal/erji/radioStation.html)，在"类型："行右侧即可看到 **★ 收藏** 入口。
+安装后打开 [云听电台页](https://www.radio.cn/pc-portal/erji/radioStation.html)，在"类型"列表末尾（"民族"之后）即可看到 **★ 收藏** 入口。
 
 ## 背景
 
@@ -28,7 +28,7 @@ radio.cn 直播流地址如 `https://ytcastmp3.radio.cn/90/stream_11076.mp3?type
 
 浏览器安装 Tampermonkey → 新建脚本 → 粘贴 `radio_fav.user.js` 内容 → 保存。打开云听电台页：
 
-- "类型："行右侧出现 ★ 收藏 入口
+- "类型"列表末尾（"民族"之后）出现 ★ 收藏 入口
 - 电台卡片右上角 ☆/★ 一键收藏/取消
 - 点击 ★ 收藏 弹出面板，点台名播放（自动重新拉新签名，不过期）、点 ✕ 取消
 
@@ -48,4 +48,5 @@ radio.cn 直播流地址如 `https://ytcastmp3.radio.cn/90/stream_11076.mp3?type
 
 ## 版本
 
+- radio_fav.user.js v1.1.0 (2026-09-06)：收藏入口位置从"类型："标题行改为类型列表末尾（"民族"之后）
 - radio_fav.user.js v1.0.0 (2026-08-30)
