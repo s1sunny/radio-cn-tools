@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         云听电台收藏助手
 // @namespace    radio.cn-fav
-// @version      1.1.0
+// @version      1.1.1
 // @description  云听电台页"类型"列表末尾（"民族"之后）增加收藏入口：电台可一键收藏/取消，收藏列表点击播放（自动刷新签名地址，永不403）
 // @match        https://www.radio.cn/pc-portal/erji/radioStation.html*
 // @grant        none
@@ -58,8 +58,10 @@
 
     // ---------- 样式 ----------
     var css = [
-        '#rfFavBtn { cursor:pointer; margin-left:14px; padding:2px 8px; border:1px solid #d8a01a; border-radius:4px; color:#d8a01a; font-size:13px; background:#fff; white-space:nowrap; }',
-        '#rfFavBtn:hover { background:#d8a01a; color:#fff; }',
+        // v1.1.1: 高特异性选择器压过页面 #scrolllx #livetype .box a(2 ID > 1 ID)，
+        // 否则 padding 被页面 6px 覆盖、font-size 13px 偏大、加边框后总高>26px 被 li.box overflow:hidden 裁切
+        '#scrolllx #livetype .box #rfFavBtn, #rfFavBtn { cursor:pointer; display:block; margin:0 5px; padding:2px 8px; border:1px solid #d8a01a; border-radius:4px; color:#d8a01a; font-size:12px; line-height:18px; background:#fff; white-space:nowrap; }',
+        '#scrolllx #livetype .box #rfFavBtn:hover, #rfFavBtn:hover { background:#d8a01a; color:#fff; padding:2px 8px; }',
         '#rfFavBtn.rf-active { background:#d8a01a; color:#fff; }',
         '.rf-star { position:absolute; top:3px; right:5px; z-index:99; cursor:pointer; font-size:17px; line-height:1; text-shadow:0 0 2px #fff,0 0 3px #fff; -webkit-user-select:none; user-select:none; }',
         '.rf-star.rf-on { color:#ffb400; }',
@@ -83,6 +85,7 @@
 
     // ---------- 收藏按钮(类型列表末尾, "民族"之后) ----------
     // v1.1.0: 插入点从"类型："标题行改为 #livetype 列表末尾(最后一个类型标签之后)
+    // v1.1.1: CSS 改为高特异性选择器, 修复字号偏大/边框被 li.box overflow 裁切
     function addFavBtn() {
         var typeRow = Array.prototype.find.call(
             document.querySelectorAll('.area_name'),

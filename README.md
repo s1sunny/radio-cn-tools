@@ -48,5 +48,6 @@ radio.cn 直播流地址如 `https://ytcastmp3.radio.cn/90/stream_11076.mp3?type
 
 ## 版本
 
+- radio_fav.user.js v1.1.1 (2026-09-06)：修复按钮字号偏大(13px→12px)与边框被 li.box overflow 裁切问题，CSS 改高特异性选择器
 - radio_fav.user.js v1.1.0 (2026-09-06)：收藏入口位置从"类型："标题行改为类型列表末尾（"民族"之后）
 - radio_fav.user.js v1.0.0 (2026-08-30)
